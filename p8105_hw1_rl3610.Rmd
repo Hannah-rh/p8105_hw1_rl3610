@@ -1,30 +1,23 @@
 ---
-title: "Untitled"
+title: "HW1"
 output: github_document
+author: Ruohan Lyu
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Load the Library and Dataset
+
+```{r}
+library(moderndive)
+library(ggplot2)
+data("early_january_weather")
 ```
 
-## GitHub Documents
+# Describing the Dataset
+## early_january_weather
 
-This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+The variables included in this dataset are: `r paste(names(early_january_weather), collapse = ", ")`. Some important variables are temp, humid, and time_hour, which will be used to create a scatterplot in the next step.
 
-## Including Code
+This dataset contains `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.
 
-You can include R code in the document as follows:
+The mean temperature for the dataset is `r mean(early_january_weather$temp, na.rm = TRUE)`.
 
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
