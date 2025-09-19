@@ -40,6 +40,11 @@ weather_plot <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color
 weather_plot
 ```
 
+## Saving the Plot
+
+```{r}
+ggsave("scatterplot.png", plot = weather_plot, width = 8, height = 6)
+```
 
 
 
