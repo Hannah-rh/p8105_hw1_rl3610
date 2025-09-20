@@ -4,7 +4,8 @@ output: github_document
 author: Ruohan Lyu
 ---
 
-# Load the Library and Dataset
+# Problem 1
+## Load the Library and Dataset
 
 ```{r}
 library(moderndive)
@@ -12,8 +13,8 @@ library(ggplot2)
 data("early_january_weather")
 ```
 
-# Describing the Dataset
-## early_january_weather
+## Describing the Dataset
+### early_january_weather
 
 The variables included in this dataset are: `r paste(names(early_january_weather), collapse = ", ")`. Some important variables are temp, humid, and time_hour, which will be used to create a scatterplot in the next step.
 
@@ -21,14 +22,14 @@ This dataset contains `r nrow(early_january_weather)` rows and `r ncol(early_jan
 
 The mean temperature for the dataset is `r mean(early_january_weather$temp, na.rm = TRUE)`.
 
-# Making a scatterplot
-## Load ggplot2
+## Making a scatterplot
+### Load ggplot2
 
 ```{r}
 library(ggplot2)
 ```
 
-## Scatterplot
+### Scatterplot
 
 ```{r}
 weather_plot <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
@@ -40,11 +41,43 @@ weather_plot <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color
 weather_plot
 ```
 
-## Saving the Plot
+### Saving the Plot
 
 ```{r}
 ggsave("scatterplot.png", plot = weather_plot, width = 8, height = 6)
 ```
 
+# Problem 2
+## Create a Data Frame
+### Four Factors
+**1. a random sample of size 10 from a standard Normal distribution**
+```{r}
+random_sample = rnorm(10)
+```
 
+**2. a logical vector indicating whether elements of the sample are greater than 0**
+```{r}
+logical_vector = ifelse(random_sample > 0, "yes", "no")
+```
+
+**3. a character vector of length 10**
+```{r}
+character_vector = c("cat","dog","bird","fish","ant","bee","cow","duck","lion","tiger")
+```
+
+**4. a factor vector of length 10, with 3 different factor “levels”**
+```{r}
+factor_vector = factor(c("A","B","C","A","B","C","A","B","C","A"))
+```
+
+### Data Frame
+```{r}
+my_dataframe = data.frame(
+  random = random_sample,
+  logical = logical_vector,
+  character = character_vector,
+  factor = factor_vector
+)
+my_dataframe #print the data frame
+```
 
