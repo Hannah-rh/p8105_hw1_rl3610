@@ -9,7 +9,7 @@ author: Ruohan Lyu
 
 ```{r}
 library(moderndive)
-library(ggplot2)
+library(tidyverse)
 data("early_january_weather")
 ```
 
@@ -57,7 +57,7 @@ random_sample = rnorm(10)
 
 **2. a logical vector indicating whether elements of the sample are greater than 0**
 ```{r}
-logical_vector = ifelse(random_sample > 0, "yes", "no")
+logical_vector = ifelse(random_sample > 0, TRUE, FALSE)
 ```
 
 **3. a character vector of length 10**
@@ -80,4 +80,17 @@ my_dataframe = data.frame(
 )
 my_dataframe #print the data frame
 ```
+
+## Try to take the mean of each variable in the dataframe
+```{r}
+mean(pull(my_dataframe, random))
+mean(pull(my_dataframe, logical))
+mean(pull(my_dataframe, character))
+mean(pull(my_dataframe, factor))
+```
+
+According to the results, the mean of random_sample is `r mean(pull(my_dataframe, random))`, the mean of logical_vector is `r mean(pull(my_dataframe, logical))`. However, the mean for character_vector and factor_vector returned `r mean(pull(my_dataframe, character))` and `r mean(pull(my_dataframe, factor))`.
+
+
+
 
