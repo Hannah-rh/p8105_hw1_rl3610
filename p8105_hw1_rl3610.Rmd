@@ -13,23 +13,16 @@ library(tidyverse)
 data("early_january_weather")
 ```
 
-## Describing the Dataset
-### early_january_weather
+## Describe the Dataset
 
-The variables included in this dataset are: `r paste(names(early_january_weather), collapse = ", ")`. Some important variables are temp, humid, and time_hour, which will be used to create a scatterplot in the next step.
+The variables included in this dataset are: `r paste(names(early_january_weather), collapse = ", ")`. Some important variables are `temp`, `humid`, and `time_hour`, which will be used to create a scatterplot in the next step.
 
 This dataset contains `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.
 
 The mean temperature for the dataset is `r mean(early_january_weather$temp, na.rm = TRUE)`.
 
-## Making a scatterplot
-### Load ggplot2
-
-```{r}
-library(ggplot2)
-```
-
-### Scatterplot
+## Scatterplot
+### Create the Scatterplot
 
 ```{r}
 weather_plot <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color = humid)) + 
@@ -41,61 +34,46 @@ weather_plot <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color
 weather_plot
 ```
 
-### Saving the Plot
+### Save the Plot
 
 ```{r}
 ggsave("scatterplot.png", plot = weather_plot, width = 8, height = 6)
 ```
 
 # Problem 2
-## Create a Data Frame
-### Four Factors
-**1. a random sample of size 10 from a standard Normal distribution**
+## Create Data Frame
+
 ```{r}
 random_sample = rnorm(10)
 ```
 
-**2. a logical vector indicating whether elements of the sample are greater than 0**
-```{r}
-logical_vector = random_sample > 0
-```
-
-**3. a character vector of length 10**
-```{r}
-character_vector = c("cat","dog","bird","fish","ant","bee","cow","duck","lion","tiger")
-```
-
-**4. a factor vector of length 10, with 3 different factor “levels”**
-```{r}
-factor_vector = factor(c("A","B","C","A","B","C","A","B","C","A"))
-```
-
-### Data Frame
 ```{r}
 my_dataframe = data.frame(
-  random = random_sample,
-  logical = logical_vector,
-  character = character_vector,
-  factor = factor_vector
+  random_sample,
+  logical_vector = random_sample > 0,
+  character_vector = c("cat","dog","bird","fish","ant","bee","cow","duck","lion","tiger"),
+  factor_vector = factor(c("A","B","C","A","B","C","A","B","C","A"))
 )
 my_dataframe #print the data frame
 ```
 
-## Try to take the mean of each variable in the dataframe
+## Take the Mean
 ```{r}
-mean(pull(my_dataframe, random))
-mean(pull(my_dataframe, logical))
-mean(pull(my_dataframe, character))
-mean(pull(my_dataframe, factor))
+mean(pull(my_dataframe, random_sample))
+mean(pull(my_dataframe, logical_vector))
+mean(pull(my_dataframe, character_vector))
+mean(pull(my_dataframe, factor_vector))
 ```
 
-According to the results, the mean of `random_sample` and `logical_vector` can be calculated as `r mean(pull(my_dataframe, random))` and `r mean(pull(my_dataframe, logical))` (defined as 0 or 1). However, attempting to compute the mean of the other two vectors returns `NA`.
+According to the results, the mean of `random_sample` and `logical_vector` can be calculated as `r mean(pull(my_dataframe, random_sample))` and `r mean(pull(my_dataframe, logical_vector))` (defined as 0 or 1). However, attempting to compute the mean of the other two vectors returns `NA`.
 
-## Applying the as.numeric function
+## Apply the as.numeric Function
 ```{r}
-numeric_logical <- as.numeric(pull(my_dataframe, logical))
-numeric_character <- as.numeric(pull(my_dataframe, character))
-numeric_factor <- as.numeric(pull(my_dataframe, factor))
+numeric_logical <- as.numeric(pull(my_dataframe, logical_vector))
+numeric_character <- as.numeric(pull(my_dataframe, character_vector))
+numeric_factor <- as.numeric(pull(my_dataframe, factor_vector))
 ```
 
-Logical variables can be automatically converted into numbers (TRUE = 1, FALSE = 0), which allows us to calculate the mean. Factor variables can also be converted to numbers using the as.numeric function; however, the resulting mean has no real interpretive meaning. Finally, character variables cannot be converted to numbers, so it is impossible to take the mean.
+Logical variables can be automatically converted into numbers (TRUE = 1, FALSE = 0), which allows us to calculate the mean. Factor variables can also be converted to numbers using the as.numeric function; however, the resulting mean has no real interpretive meaning. Finally, character variables cannot be converted to numbers, so it is impossible to take the mean. 
+
+All these results explain why the mean of random_sample and logical_vector can be calculated, while attempting to take the mean of character or factor variables either fails or produces meaningless values.
