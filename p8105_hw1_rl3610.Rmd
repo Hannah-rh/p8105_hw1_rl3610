@@ -34,6 +34,10 @@ weather_plot <- ggplot(early_january_weather, aes(x = time_hour, y = temp, color
 weather_plot
 ```
 
+### Describe the Plot
+
+The plot shows that the temperature has an overall slight warming trend, but fluctuates cyclically, being very high around midday and decreasing overnight. In addition, there is a seemingly inverse relationship between temperature and humidity over time. In the same day, lower humidity always occurs with the temperature peaks, indicating a moderate correlation between the two variables.
+
 ### Save the Plot
 
 ```{r}
