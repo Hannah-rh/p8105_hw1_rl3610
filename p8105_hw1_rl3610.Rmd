@@ -57,7 +57,7 @@ random_sample = rnorm(10)
 
 **2. a logical vector indicating whether elements of the sample are greater than 0**
 ```{r}
-logical_vector = ifelse(random_sample > 0, TRUE, FALSE)
+logical_vector = random_sample > 0
 ```
 
 **3. a character vector of length 10**
@@ -89,8 +89,13 @@ mean(pull(my_dataframe, character))
 mean(pull(my_dataframe, factor))
 ```
 
-According to the results, the mean of random_sample is `r mean(pull(my_dataframe, random))`, the mean of logical_vector is `r mean(pull(my_dataframe, logical))`. However, the mean for character_vector and factor_vector returned `r mean(pull(my_dataframe, character))` and `r mean(pull(my_dataframe, factor))`.
+According to the results, the mean of `random_sample` and `logical_vector` can be calculated as `r mean(pull(my_dataframe, random))` and `r mean(pull(my_dataframe, logical))` (defined as 0 or 1). However, attempting to compute the mean of the other two vectors returns `NA`.
 
+## Applying the as.numeric function
+```{r}
+numeric_logical <- as.numeric(pull(my_dataframe, logical))
+numeric_character <- as.numeric(pull(my_dataframe, character))
+numeric_factor <- as.numeric(pull(my_dataframe, factor))
+```
 
-
-
+Logical variables can be automatically converted into numbers (TRUE = 1, FALSE = 0), which allows us to calculate the mean. Factor variables can also be converted to numbers using the as.numeric function; however, the resulting mean has no real interpretive meaning. Finally, character variables cannot be converted to numbers, so it is impossible to take the mean.
